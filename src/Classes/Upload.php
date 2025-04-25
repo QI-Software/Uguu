@@ -162,7 +162,7 @@ class Upload extends Response
                 )
             ) {
                 $this->Connector->response->error(
-                    500,
+                    506,
                     'Rate limit, please wait ' . $this->Connector->CONFIG['RATE_LIMIT_TIMEOUT'] .
                        ' seconds before uploading again.',
                 );
@@ -189,10 +189,10 @@ class Upload extends Response
         // skip inserting it into the DB.
         if (!$this->FILE_INFO['DUPE']) {
             if (!is_dir($this->Connector->CONFIG['FILES_ROOT'])) {
-                $this->Connector->response->error(500, 'File storage path not accessible.');
+                $this->Connector->response->error(501, 'File storage path not accessible.');
             }
             if (!is_writable($this->Connector->CONFIG['FILES_ROOT'])) {
-                $this->Connector->response->error(500, 'File storage path not writeable.');
+                $this->Connector->response->error(502, 'File storage path not writeable.');
             }
             if (!$this->Connector->CONFIG['BENCHMARK_MODE']) {
                 if (
@@ -202,10 +202,10 @@ class Upload extends Response
                       $this->FILE_INFO['FILENAME'],
                     )
                 ) {
-                    $this->Connector->response->error(500, 'Failed to move file to destination.');
+                    $this->Connector->response->error(503, 'Failed to move file to destination.');
                 }
                 if (!chmod($this->Connector->CONFIG['FILES_ROOT'] . $this->FILE_INFO['FILENAME'], 0644)) {
-                    $this->Connector->response->error(500, 'Failed to change file permissions.');
+                    $this->Connector->response->error(504, 'Failed to change file permissions.');
                 }
             }
             $this->Connector->newIntoDB($this->FILE_INFO, $this->fingerPrintInfo);
@@ -405,7 +405,7 @@ class Upload extends Response
     {
         do {
             if ($this->Connector->CONFIG['FILES_RETRIES'] === 0) {
-                $this->Connector->response->error(500, 'Gave up trying to find an unused name!');
+                $this->Connector->response->error(505, 'Gave up trying to find an unused name!');
             }
             $NEW_NAME = $this->Connector->randomizer->getBytesFromString(
                 $this->Connector->CONFIG['ID_CHARSET'],
