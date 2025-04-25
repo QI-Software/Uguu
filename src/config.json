@@ -35,7 +35,7 @@
   "ANTI_DUPE": true,
   "BLACKLIST_DB": false,
   "FILTER_MODE": true,
-  "RATE_LIMIT": true,
+  "RATE_LIMIT": false,
   "RATE_LIMIT_TIMEOUT": 60,
   "RATE_LIMIT_FILES": 100,
   "FILES_ROOT": "/var/www/files/",
