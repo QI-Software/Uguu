@@ -46,9 +46,9 @@ class Connector extends Database
     public function errorHandler(int $errno, string $errstr): void
     {
         if ($this->CONFIG['DEBUG']) {
-            $this->response->error(500, 'Server error: ' . $errstr);
+            $this->response->error(513, 'Server error: ' . $errstr);
         } else {
-            $this->response->error(500, 'Server error.');
+            $this->response->error(512, 'Server error.');
         }
     }
 
@@ -56,9 +56,9 @@ class Connector extends Database
     {
         if (!is_null($e = error_get_last())) {
             if ($this->CONFIG['DEBUG']) {
-                $this->response->error(500, 'FATAL Server error: ' . print_r($e, true));
+                $this->response->error(510, 'FATAL Server error: ' . print_r($e, true));
             } else {
-                $this->response->error(500, 'Server error.');
+                $this->response->error(511, 'Server error.');
             }
         }
     }
@@ -73,10 +73,10 @@ class Connector extends Database
             return $config;
         }
         if (!is_readable($configFile = __DIR__ . '/../config.json')) {
-            $this->response->error(500, 'Cant read settings file.');
+            $this->response->error(509, 'Cant read settings file.');
         }
         $config = json_decode(file_get_contents($configFile), true)
-           ?: $this->response->error(500, 'Invalid JSON in config file.');
+           ?: $this->response->error(508, 'Invalid JSON in config file.');
         $apcuLoaded && apcu_store('UC', $config);
         return $config;
     }

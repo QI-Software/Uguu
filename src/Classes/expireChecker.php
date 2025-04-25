@@ -114,10 +114,10 @@ class expireChecker
             return $config;
         }
         if (!is_readable($configFile = __DIR__ . '/../config.json')) {
-            $this->response->error(500, 'Cant read settings file.');
+            $this->response->error(507, 'Cant read settings file.');
         }
         $config = json_decode(file_get_contents($configFile), true)
-           ?: $this->response->error(500, 'Invalid JSON in config file.');
+           ?: $this->response->error(506, 'Invalid JSON in config file.');
         $apcuLoaded && apcu_store('UC', $config);
         return $config;
     }
