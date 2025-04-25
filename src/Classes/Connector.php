@@ -58,7 +58,7 @@ class Connector extends Database
             if ($this->CONFIG['DEBUG']) {
                 $this->response->error(510, 'FATAL Server error: ' . print_r($e, true));
             } else {
-                $this->response->error(511, 'Server error.');
+                $this->response->error(500, 'Server error.');
             }
         }
     }

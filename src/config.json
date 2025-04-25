@@ -6,7 +6,7 @@
     "faq.ejs",
     "api.ejs"
   ],
-  "DEBUG": false,
+  "DEBUG": true,
   "BENCHMARK_MODE": false,
   "max_upload_size": 100,
   "expireTime": 6,
